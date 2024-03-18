@@ -10,7 +10,7 @@ function Header() {
         <span className="flex space-x-2">
           <Link
             to="/sign-in"
-            className="flex items-center text-blue-500 px-5 py-2 bg-white rounded-full  font-bold hover:bg-gray-200"
+            className="flex items-center text-blue-500 px-5 py-2 bg-white rounded-full  font-bold hover:bg-gray-200 hover:text-black"
           >
             Sign In
           </Link>

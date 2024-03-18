@@ -18,9 +18,9 @@ router.post(
     }),
   ],
   async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({message: errors.array()})
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() })
     }
     try {
       let user = await User.findOne({
@@ -46,7 +46,7 @@ router.post(
         secure: process.env.NODE_ENV === 'production',
         maxAge: 86400000, //1d in miliseconds
       })
-      return res.sendStatus(200) // nothing to send, cookies already send to client
+      return res.status(200).json({ message: 'User registered successfully.' }) // nothing to send, cookies already send to client
     } catch (err) {
       res.status(500).send({ message: 'Something went wrong' })
     }
