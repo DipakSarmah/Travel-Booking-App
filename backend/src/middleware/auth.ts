@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
+// adding new usedId to request obj using typescript
+
 declare global {
   namespace Express {
     interface Request {
