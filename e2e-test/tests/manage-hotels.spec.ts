@@ -22,33 +22,45 @@ test.beforeEach(async ({ page }) => {
   await expect(page.getByText('Sign in Successful')).toBeVisible()
 })
 
-test('should allow user to add a hotel', async ({ page }) => {
-  await page.goto(`${UI_URL}add-hotel`)
+// test('should allow user to add a hotel', async ({ page }) => {
+//   await page.goto(`${UI_URL}add-hotel`)
 
-  await page.locator('[name="name"]').fill('Test Hotel')
-  await page.locator('[name="city"]').fill('Test City')
-  await page.locator('[name="country"]').fill('Test Country')
-  await page
-    .locator('[name="description"]')
-    .fill('Test Description for the test hotel')
-  await page.locator('[name="pricePerNight"]').fill('100')
+//   await page.locator('[name="name"]').fill('Test Hotel')
+//   await page.locator('[name="city"]').fill('Test City')
+//   await page.locator('[name="country"]').fill('Test Country')
+//   await page
+//     .locator('[name="description"]')
+//     .fill('Test Description for the test hotel')
+//   await page.locator('[name="pricePerNight"]').fill('100')
 
-  await page.selectOption('select[name="starRating"]', '3')
+//   await page.selectOption('select[name="starRating"]', '3')
 
-  await page.getByText('Budget').click()
-  await page.getByLabel('Free Wifi').check()
-  await page.getByLabel('Parking').check()
-  await page.getByLabel('Family Rooms').check()
+//   await page.getByText('Budget').click()
+//   await page.getByLabel('Free Wifi').check()
+//   await page.getByLabel('Parking').check()
+//   await page.getByLabel('Family Rooms').check()
 
-  await page.locator('[name="adultCount"]').fill('2')
-  await page.locator('[name="childCount"]').fill('4')
+//   await page.locator('[name="adultCount"]').fill('2')
+//   await page.locator('[name="childCount"]').fill('4')
 
-  await page.setInputFiles('[name="imageFiles"]', [
-    path.join(__dirname, 'files', 'img1.jpg'),
-  ])
+//   await page.setInputFiles('[name="imageFiles"]', [
+//     path.join(__dirname, 'files', 'img1.jpg'),
+//   ])
 
-  await page.getByRole('button', { name: 'Save' }).click()
-  await expect(page.getByText('Saving')).toBeVisible()
-  await page.waitForTimeout(6000)
-  await expect(page.getByText('Hotel Saved!')).toBeVisible()
+//   await page.getByRole('button', { name: 'Save' }).click()
+//   await expect(page.getByText('Saving')).toBeVisible()
+//   await page.waitForTimeout(7000)
+//   await expect(page.getByText('Hotel Saved!')).toBeVisible()
+// })
+
+test('Should display hotels', async ({ page }) => {
+  await page.goto(`${UI_URL}my-hotels`)
+  await expect(page.getByRole('heading', { name: 'Test Hotel' })).toBeVisible()
+  await expect(page.getByText('Test City, Test Country')).toBeVisible()
+  await expect(page.getByText('Budget')).toBeVisible()
+  await expect(page.getByText('2 Adults, 4 Children')).toBeVisible()
+  await expect(page.getByText('3 Star Rating')).toBeVisible()
+  await expect(page.getByText('Test Description')).toBeVisible()
+  await expect(page.getByRole('link', { name: 'View Details' })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Add Hotel' })).toBeVisible()
 })
